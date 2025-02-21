@@ -53,7 +53,7 @@ impl<T> LockFreeStack<T> {
             if current_head.is_null() {
                 return None;
             }
-            let next = (unsafe { current_head.read_volatile() }).next;
+            let next = (unsafe { current_head.read() }).next; // readvolatile() has nothing to do with atmoics
             
             // If head has not changed since load, point head to next node
             if self
